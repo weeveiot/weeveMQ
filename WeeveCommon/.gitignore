@@ -1,0 +1,9 @@
+#build
+build
+
+#external sources
+external/*
+
+#vscode configs
+.vscode
+

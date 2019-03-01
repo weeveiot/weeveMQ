@@ -1,0 +1,4 @@
+// the configured options and settings for versioncheck
+#define WCL_VERSION_MAJOR @WCL_VERSION_MAJOR@
+#define WCL_VERSION_MINOR @WCL_VERSION_MINOR@
+#define WCL_VERSION_REVISION @WCL_VERSION_REVISION@
