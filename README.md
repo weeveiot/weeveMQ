@@ -1,20 +1,20 @@
-# Weeve MQTTS
-The Weeve MQTTS software based on mosquitto release 1.5.2 and WeeveClientLibrary 0.0.1
-It provides a broker and clients that can produce and consume MQTTS messages. 
+# weeveMQ
+The weeveMQ software is based on mosquitto release 1.5.2 and WeeveClientLibrary 0.0.1
+WeeveMQ implements a broker and client for the MQTTS protocol, a publish and subscribe protocol inspired by the MQTT protocol and adding lightweight cryptography to securely publish and subscribe messages without the burden of the computationally costly and for low-end IoT applications unsuitable SSL/TLS protocol. For details, visit [weeve.network](https://weeve.network)
 
 
 ## Install 
 
-To install the MQTTS broker and clients that support the MQTTS protocol use the install.sh script.
+To install the MQTTS broker and client run the install.sh script.
 This script will check if all dependenceys are on your system and install them if needed.
 
-1. Clonse this repository to your maschine
+1. Clone the weeveMQ repository to your maschine
 
-2. Install the broker and clients with all it's dependencies using the install script: `bash install.sh`
+2. Install the broker and clients with all dependencies by executing the install script: `bash install.sh`
 
 ## Run Instructions
 
-After the Broker and it's clients are compiled on you system use the following commands to execute it.
+After the compilation of broker and client run the following commands:
 
 Run broker in command-prompt 1  
 ```shell
@@ -53,7 +53,7 @@ Install tinycbor here, which is used to encode and decode messages inside of MQT
 
 ## Compile WeeveClientLibrary
 
-It provides the main functions to translate simple MQTT to Weeves MQTTS 
+The WCL provides the main functions to translate simple MQTT to MQTTS 
 
 ### Prerequisite (dev-machine):
 Install git, gnu-binutils and libtool.
