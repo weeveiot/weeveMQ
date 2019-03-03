@@ -1,6 +1,5 @@
 # weeveMQ
-The weeveMQ software is based on mosquitto release 1.5.2 and WeeveClientLibrary 0.0.1
-WeeveMQ implements a broker and client for the MQTTS protocol, a publish and subscribe protocol inspired by the MQTT protocol and adding lightweight cryptography to securely publish and subscribe messages without the burden of the computationally costly and for low-end IoT applications unsuitable SSL/TLS protocol. For details, visit [weeve.network](https://weeve.network)
+The weeveMQ is a secure, highly scalable, enterpirse-ready IoT messaging broker based on mosquitto release 1.5.2 and WeeveClientLibrary 0.0.1. WeeveMQ implements a broker and client for the MQTTS protocol, a publish and subscribe protocol inspired by the MQTT protocol and adding lightweight cryptography to securely publish and subscribe messages without the burden of the computationally costly and for low-end IoT applications unsuitable SSL/TLS protocol. For details, visit [weeve.network](https://weeve.network)
 
 
 ## Install 
