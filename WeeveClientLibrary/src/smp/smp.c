@@ -117,7 +117,7 @@ void smpTerminate(void)
     }
 
     FUNCTION_EXIT_RETURN(wclResult);
-    return wclResult;
+    return;
 }
 
 /* Open a Smp session. */
