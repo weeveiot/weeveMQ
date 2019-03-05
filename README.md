@@ -1,19 +1,20 @@
 # weeveMQ
-The weeveMQ is a secure, highly scalable, enterpirse-ready IoT messaging broker based on mosquitto release 1.5.2 and WeeveClientLibrary 0.0.1. WeeveMQ implements a broker and client for the MQTTS protocol, a publish and subscribe protocol inspired by the MQTT protocol and adding lightweight cryptography to securely publish and subscribe messages without the burden of the computationally costly and for low-end IoT applications unsuitable SSL/TLS protocol. For details, visit [weeve.network](https://weeve.network)
+The weeveMQ is a secure, highly scalable, enterprise-ready IoT messaging broker. This version of weeveMQ is based on mosquitto release 1.5.2 and WeeveClientLibrary 0.0.1. WeeveMQ implements the MQTTS protocol, a publish and subscribe protocol inspired by the MQTT protocol and augmented with lightweight cryptography to securely publish and subscribe messages without the burden of the computationally expensive and for low-end IoT applications unsuitable SSL/TLS protocol. In a nutshell, whenever you look for secure messaging, but SSL/TLS is no option, then MQTTS is your choice! 
+For details and performance comparisions to MQTT over TLS, visit [weeve.network](https://weeve.network)
 
 
 ## Install 
 
-To install the MQTTS broker and client run the install.sh script.
-This script will check if all dependenceys are on your system and install them if needed.
+To install the MQTTS broker and client run the install script.
+The script checks for all dependencies on your system and if needed installs missing packages.
 
 1. Clone the weeveMQ repository to your maschine
 
-2. Install the broker and clients with all dependencies by executing the install script: `bash install.sh`
+2. Install the broker and client with all dependencies by executing the install script: `bash install.sh`
 
 ## Run Instructions
 
-After the compilation of broker and client run the following commands:
+After the compilation of the broker and client run the following commands:
 
 Run broker in command-prompt 1  
 ```shell
@@ -33,13 +34,13 @@ Run publisher in command-Pompt 3
 <WeeveMQTTSClient/build_mqttSMP/publisher>$ ./mosquitto_pub -d -t hello/world -m "Hello world, this is weeve's MQTTS!"  
 ```
 
-You should see in subscriber's command-prompt 2, message "Hello world, this is weeve's MQTTS!" is displayed.  
+You should see in subscriber's command-prompt 2 message "Hello world, this is weeve's MQTTS!".  
 
 ## Manual Installation
-If you want to manually compile the broker and the clients use the following commands: 
+For manual compilation of the broker and the client use the following commands: 
 
 ## Compile WeeveCommon
-WeeveCommon represent an interface. This interfaces are implementet by WeeveClientLibrary which currently uses the LibTomCrypt for cryptgraphic functions. 
+WeeveCommon represents an interface implementet by WeeveClientLibrary which currently uses the LibTomCrypt lib for cryptgraphic functions. 
 Install tinycbor here, which is used to encode and decode messages inside of MQTTS and is used by WeeveClientLibrary
 
 ```shell
