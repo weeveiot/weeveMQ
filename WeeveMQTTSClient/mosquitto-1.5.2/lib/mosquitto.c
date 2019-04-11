@@ -81,9 +81,6 @@ struct mosquitto *mosquitto_new(const char *id, bool clean_session, void *userda
 {
 	struct mosquitto *mosq = NULL;
 	int rc;
-#if defined(WITH_WEEVE_SMP)
-	WclError_t wclStatus = WCL_SUCCESS;
-#endif
 
 	if(clean_session == false && id == NULL){
 		errno = EINVAL;
@@ -115,18 +112,15 @@ struct mosquitto *mosquitto_new(const char *id, bool clean_session, void *userda
 	}else{
 		errno = ENOMEM;
 	}
-#if defined(WITH_WEEVE_SMP)
-	wclStatus = wclSmpOpen(&mosq->smpSession);
-	if(WCL_SUCCESS != wclStatus){
-		errno = EINVAL;
-		return NULL;
-	}
-#endif
+
 	return mosq;
 }
 
 int mosquitto_reinitialise(struct mosquitto *mosq, const char *id, bool clean_session, void *userdata)
 {
+#if defined(WITH_WEEVE_SMP)
+	WclError_t wclStatus = WCL_SUCCESS;
+#endif
 	int i;
 
 	if(!mosq) return MOSQ_ERR_INVAL;
@@ -134,6 +128,15 @@ int mosquitto_reinitialise(struct mosquitto *mosq, const char *id, bool clean_se
 	if(clean_session == false && id == NULL){
 		return MOSQ_ERR_INVAL;
 	}
+#if defined(WITH_WEEVE_SMP)
+	if(mosq->smpSession) {
+		wclStatus = wclSmpClose(mosq->smpSession);
+		mosq->smpSession = NULL;
+		if (WCL_SUCCESS != wclStatus) {
+			/* errno = EINVAL; */
+		}
+}
+#endif
 
 	mosquitto__destroy(mosq);
 	memset(mosq, 0, sizeof(struct mosquitto));
@@ -220,7 +223,13 @@ int mosquitto_reinitialise(struct mosquitto *mosq, const char *id, bool clean_se
 	pthread_mutex_init(&mosq->mid_mutex, NULL);
 	mosq->thread_id = pthread_self();
 #endif
-
+#if defined(WITH_WEEVE_SMP)
+	wclStatus = wclSmpOpen(&mosq->smpSession);
+	if(WCL_SUCCESS != wclStatus){
+		errno = EINVAL;
+		return NULL;
+	}
+#endif
 	return MOSQ_ERR_SUCCESS;
 }
 

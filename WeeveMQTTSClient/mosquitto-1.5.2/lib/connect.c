@@ -26,6 +26,11 @@ Contributors:
 #include "send_mosq.h"
 #include "socks_mosq.h"
 
+#if defined(WITH_WEEVE_SMP)
+#include "wclCommon.h"
+#include "wclSmp.h"
+#endif
+
 static int mosquitto__reconnect(struct mosquitto *mosq, bool blocking);
 static int mosquitto__connect_init(struct mosquitto *mosq, const char *host, int port, int keepalive, const char *bind_address);
 
@@ -123,6 +128,30 @@ static int mosquitto__reconnect(struct mosquitto *mosq, bool blocking)
 	struct mosquitto__packet *packet;
 	if(!mosq) return MOSQ_ERR_INVAL;
 	if(!mosq->host || mosq->port <= 0) return MOSQ_ERR_INVAL;
+
+#if defined(WITH_WEEVE_SMP)
+	WclError_t wclStatus = WCL_SUCCESS;
+	if(mosq->smpSession) {
+		wclStatus = wclSmpClose(mosq->smpSession);
+		mosq->smpSession = NULL;
+		if (WCL_SUCCESS != wclStatus) {
+		
+		}
+	}
+	wclTerminate();
+	
+	wclStatus = wclInit();
+	if (WCL_SUCCESS != wclStatus) {
+
+	}
+	
+	wclStatus = wclSmpOpen(&mosq->smpSession);
+	if(WCL_SUCCESS != wclStatus){
+
+	}
+
+#endif
+
 
 	pthread_mutex_lock(&mosq->state_mutex);
 #ifdef WITH_SOCKS
